@@ -45,7 +45,17 @@ elif not options.IndexType:
     sys.exit(1)
 
 # Setup ES connection
-es = Elasticsearch([options.EsHost + ':' + options.EsPort], use_ssl=options.SSL)
+if options.SSL:
+    protocol = 'https://'
+else:
+    protocol = 'http://'
+
+if options.EsUser and options.EsPass:
+    es = Elasticsearch([protocol + options.EsUser + ':' + options.EsPass + '@' + options.EsHost + ':' + options.EsPort])
+elif options.EsUser:
+    es = Elasticsearch([protocol + options.EsUser + '@' + options.EsHost + ':' + options.EsPort])
+else:
+    es = Elasticsearch([options.EsHost + ':' + options.EsPort])
 
 # Read in source file
 with open(options.FileName, 'r') as f:
