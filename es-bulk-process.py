@@ -54,7 +54,7 @@ if options.EsUser and options.EsPass:
 elif options.EsUser:
     es = Elasticsearch([protocol + options.EsUser + '@' + options.EsHost + ':' + options.EsPort])
 else:
-    es = Elasticsearch([options.EsHost + ':' + options.EsPort])
+    es = Elasticsearch([protocol + options.EsHost + ':' + options.EsPort])
 
 # Read in source file
 with open(options.FileName, 'r') as f:
