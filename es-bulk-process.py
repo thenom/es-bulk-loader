@@ -5,7 +5,6 @@ from elasticsearch import Elasticsearch
 import random
 
 parser = OptionParser()
-parser.add_option("-T", "--bulk-type", dest="BulkType", help="Type of bulk input (index,delete,update)", default="index")
 parser.add_option("-f", "--file", dest="FileName", help="File with the source data")
 parser.add_option("-H", "--host", dest="EsHost", help="The elasticsearch destination host")
 parser.add_option("-P", "--port", dest="EsPort", help="The elasticsearch destination Port", default="9200")
@@ -68,7 +67,7 @@ print 'Processing ' + str(options.BulkCount) + ' bulk posts with ' + str(options
 
 for count in range(0,options.BulkCount):
     for size in range(0,options.BulkSize):
-        bulk = bulk + ('{ "' + options.BulkType + '": {}}\n')
+        bulk = bulk + ('{ "index": {}}\n')
         bulk = bulk + random.choice(filecontent).rstrip('\n') + '\n'
     bulk = bulk.rstrip('\n')
     es.bulk(body=bulk, index=options.EsIndex, doc_type=options.IndexType)

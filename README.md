@@ -30,13 +30,8 @@ Options:
                         total documents)
   -b BULKSIZE, --bulk-size=BULKSIZE
                         The amount of documents in each bulk API POST
-  -t INDEXTYPE, --index-type=INDEXTYPE
-                        The type of document in the index
   -u ESUSER, --user=ESUSER
                         Username for the elasticsearch URL
   -p ESPASS, --pass=ESPASS
                         Password for the elasticsearch URL
 ```
-
-Note:
-Only the index action works currently
